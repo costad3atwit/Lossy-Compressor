@@ -15,11 +15,13 @@ def promptForFile():
     # Print the selected file path
     if file_path:
         print("Selected file:", file_path)
+        return file_path
 
+def main():
+    imgPath = promptForFile()
 
-def compressImage(img, percentage_compression):
     # Open the image file
-    img = Image.open("reference.jpg")
+    img = Image.open(imgPath)
 
     # Convert the image to a NumPy array
     img_array = np.array(img)
@@ -32,6 +34,8 @@ def compressImage(img, percentage_compression):
     U_g, S_g, Vt_g = np.linalg.svd(G, full_matrices=False)
     U_b, S_b, Vt_b = np.linalg.svd(B, full_matrices=False)
 
+
+    # CHANGE K TO A VARIABLE TO ACCEPT USER INPUT FOR COMPRESSION RATIO
     k = 50  # The number of singular values to keep
 
     # Keep only the top 'k' singular values for each channel
@@ -64,3 +68,6 @@ def compressImage(img, percentage_compression):
     img_compressed_pil.save("compressed_image.jpg")
     img = Image.open("compressed_image.jpg")
     img_compressed_pil.show()
+
+if __name__ == "__main__":
+    main()
