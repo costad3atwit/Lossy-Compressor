@@ -10,12 +10,16 @@ def promptForFile():
     root.withdraw()
 
     ## Open the file dialog
-    file_path = filedialog.askopenfilename()
+    file_path = filedialog.askopenfilename(filetypes = [('PDF Files', '*.png'),('JPG Files', '*.jpg')])
 
     # Print the selected file path
     if file_path:
         print("Selected file:", file_path)
         return file_path
+
+    # PROMPT USER TO SAY IF THEY WANT THE IMAGE TO BE OVERWRITTEN OR SAVED SOMEWHERE ELSE
+    # SET UP THE DEFAULT TO USE THE SAME FILE PATH BUT LIKE THIS:
+    # [image file path]COMPRESSED[percentage compression][file extension (.jpg,.png,etc.)]
 
 def main():
     imgPath = promptForFile()
